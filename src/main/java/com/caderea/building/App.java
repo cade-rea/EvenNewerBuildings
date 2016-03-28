@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * Created by Cade on 3/27/2016.
  */
-@ComponentScan("com.caderea.building")
+@ComponentScan
 @EnableAutoConfiguration
 public class App {
     public static void main(String[] args){
