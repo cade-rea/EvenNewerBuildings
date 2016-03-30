@@ -125,7 +125,7 @@ public class BuildingRepository {
     }
 
     public List<Room> getRoomsInBuilding(long buildingId){
-        return jdbc.query("select * from rooms where buildingId=?",new Long[]{buildingId},roomRowMapper);
+        return jdbc.query("select * from rooms where buildingId=? order by floorId",new Long[]{buildingId},roomRowMapper);
     }
 
     public List<Room> getRoomsInBuildingOnFloor(long buildingId, long floorId){

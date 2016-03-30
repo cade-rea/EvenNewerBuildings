@@ -5,16 +5,13 @@ h1{
 #header{
     width:100%;
 }
-#addBuilding, #getOneBuilding{
+#addBuilding, #getOneBuilding, #buildingList, #roomList{
     width: 45%;
     display: inline-block;
     border: 1px solid black;
     float: left;
+    margin-top:20px;
 }
-#buildingList{
+#break{
     clear: both;
-}
-
-#addBuilding input{
-
 }

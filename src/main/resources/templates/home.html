@@ -10,6 +10,7 @@
     <h1>Buildings</h1>
 </div>
 <div id="addBuilding">
+    <h3>Add Building</h3>
     <form method="POST" action="#" th:action="@{/saveBuilding}">
         <label>Name:</label>
         <input type="text" name="name" /> <br />
@@ -23,22 +24,40 @@
     </form>
 </div>
 <div id="getOneBuilding">
+    <h3>Get One Building</h3>
     <form method="post" action="#" th:action="@{/getOneBuilding}" >
         <input type="text" name="id" />
         <input type="submit" value="Get One" />
     </form>
     <span th:text="${getOneBuilding}"></span>
-</div>
-<div id="buildingList">
-    <ul th:each="buildingId : ${buildings}">
+    <ul th:each="room : ${getOneBuildingRooms}">
         <li>
-            <span th:text="${buildingId.name}">Name</span>
-            <span th:text="${buildingId.address}">Address</span>
-            <span th:text="${buildingId.id}">Id</span>
+            Building: <span th:text="${room.buildingId}"></span>,
+            Floor: <span th:text="${room.floorId}"></span>
+        </li>
+    </ul>
+</div>
+<div id="break"></div>
+<div id="buildingList">
+    <h3>Building List</h3>
+    <ul th:each="building : ${buildings}">
+        <li>
+            <span th:text="${building.name}"></span>
+            <span th:text="${building.address}"></span>
+            <span th:text="${building.id}"></span>
             <form method="POST" action="#" th:action="@{/deleteBuilding}">
-                <input type="hidden" name="id" th:value="${buildingId.id}" />
+                <input type="hidden" name="id" th:value="${building.id}" />
                 <input type="submit" value="Delete" />
             </form>
+        </li>
+    </ul>
+</div>
+<div id="roomList">
+    <h3>Room List</h3>
+    <ul th:each="room : ${rooms}">
+        <li>
+            Building: <span th:text="${room.buildingId}"></span>,
+            Floor: <span th:text="${room.floorId}"></span>
         </li>
     </ul>
 </div>

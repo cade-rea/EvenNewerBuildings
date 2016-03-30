@@ -28,9 +28,16 @@ public class BuildingController {
     //Home page
     @RequestMapping(method = RequestMethod.GET)
     public String home(Map<String,Object> model){
-        List<Building> buildings = buildingRepo.getAllBuildings();
-        model.put("buildings",buildings);
+
+        model.put("buildings", buildingRepo.getAllBuildings());
         model.put("getOneBuilding",getOneBuilding);
+        model.put("rooms", buildingRepo.getAllRooms());
+
+        if(getOneBuilding != null)
+            model.put("getOneBuildingRooms",buildingRepo.getRoomsInBuilding(getOneBuilding.getId()));
+        else
+            model.put("getOneBuildingRooms",null);
+
         return "home";
     }
 
