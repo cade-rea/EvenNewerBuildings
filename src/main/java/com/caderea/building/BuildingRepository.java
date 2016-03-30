@@ -17,46 +17,31 @@ import java.util.List;
 @Repository
 public class BuildingRepository {
     private JdbcTemplate jdbc;
+    private BuildingRowMapper rowMapper;
 
-    private class BuildingRowMapper<E> implements RowMapper<E>{
-
+    private class BuildingRowMapper implements RowMapper<Building>{
         @Override
-        public E mapRow(ResultSet resultSet, int i) throws SQLException {
-            return null;
+        public Building mapRow(ResultSet resultSet, int i) throws SQLException {
+            Building building = new Building();
+            building.setId(resultSet.getLong(1));
+            building.setName(resultSet.getString(2));
+            building.setAddress(resultSet.getString(3));
+            return building;
         }
     }
 
     @Autowired
     public BuildingRepository(JdbcTemplate jdbc){
         this.jdbc = jdbc;
+        rowMapper = new BuildingRowMapper();
     }
 
     public List<Building> getAll(){
-        return jdbc.query("select id, name, address from buildings order by id",
-                new RowMapper<Building>() {
-                    @Override
-                    public Building mapRow(ResultSet resultSet, int i) throws SQLException {
-                        Building building = new Building();
-                        building.setId(resultSet.getLong(1));
-                        building.setName(resultSet.getString(2));
-                        building.setAddress(resultSet.getString(3));
-                        return building;
-                    }
-                });
+        return jdbc.query("select id, name, address from buildings order by id", rowMapper);
     }
 
     public Building getOne(final long id) {
-        return jdbc.queryForObject("select * from buildings where id=?", new Long[]{id},
-                new RowMapper<Building>() {
-                    @Override
-                    public Building mapRow(ResultSet resultSet, int i) throws SQLException {
-                        Building building = new Building();
-                        building.setId(resultSet.getLong(1));
-                        building.setName(resultSet.getString(2));
-                        building.setAddress(resultSet.getString(3));
-                        return building;
-                    }
-                });
+        return jdbc.queryForObject("select * from buildings where id=?", new Long[]{id},rowMapper);
     }
 
     public void save(Building building){
