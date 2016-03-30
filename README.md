@@ -1,2 +1,2 @@
 # EvenNewerBuildings
-Springboot implementation of building manager
+Springboot implementation of buildingId manager

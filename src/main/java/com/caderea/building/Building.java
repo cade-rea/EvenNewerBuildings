@@ -8,6 +8,25 @@ public class Building {
     private String name;
     private String address;
 
+    private int numFloors;  //ids of floors in this building
+    //private int[] rooms; //ids of rooms in this building
+
+    public Building(){}
+
+    public Building(String name, String address, int numFloors){
+        this.id = 0;
+        this.name = name;
+        this.address = address;
+        this.numFloors = numFloors;
+    }
+
+    public Building(long id, String name, String address, int numFloors){
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.numFloors = numFloors;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -32,8 +51,24 @@ public class Building {
         return address;
     }
 
+    /*public void setRooms(int[] rooms){
+        this.rooms = rooms;
+    }
+
+    public int[] getRooms(){
+        return this.rooms;
+    }*/
+
+    public void setNumFloors(int numFloors) {
+        this.numFloors = numFloors;
+    }
+
+    public int getNumFloors() {
+        return numFloors;
+    }
+
     @Override
     public String toString() {
-        return name + ": " + address;
+        return getName() + ", " + getAddress() + ", " + getNumFloors() + " floors, ";
     }
 }
