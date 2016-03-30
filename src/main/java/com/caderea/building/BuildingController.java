@@ -18,6 +18,7 @@ import java.util.Map;
 public class BuildingController {
 
     private BuildingRepository buildingRepo;
+    private Building getOneBuilding;
 
     @Autowired
     public BuildingController(BuildingRepository buildingRepo){
@@ -28,6 +29,7 @@ public class BuildingController {
     public String home(Map<String,Object> model){
         List<Building> buildings = buildingRepo.getAll();
         model.put("buildings",buildings);
+        model.put("getOneBuilding",getOneBuilding);
         return "home";
     }
 
@@ -44,9 +46,9 @@ public class BuildingController {
     }
 
     @RequestMapping(value = "/getone", method=RequestMethod.POST)
-    public String getOne(String s){
-        long l = Long.parseLong(s);
-        buildingRepo.getOne(l);
+    public String getOne(@RequestParam("id") long id, Map<String,Object> model){
+        Building b = buildingRepo.getOne(id);
+        getOneBuilding = b;
         return "redirect:/";
     }
 }
