@@ -7,18 +7,28 @@
 <body>
 <h1>Buildings</h1>
 <form method="POST">
-    <label for="name">Name:</label>
+    <label>Name:</label>
     <input type="text" name="name" /> <br />
-    <label for="address">Address:</label>
+    <label>Address:</label>
     <input type="text" name="address" /> <br />
     <input type="submit" />
 </form>
-
+<hr />
 <ul th:each="building : ${buildings}">
     <li>
         <span th:text="${building.name}">Name</span>
         <span th:text="${building.address}">Address</span>
+        <span th:text="${building.id}">Id</span>
+        <form method="POST" action="#" th:action="@{/delete}">
+            <input type="hidden" name="id" th:value="${building.id}" />
+            <input type="submit" value="Delete" />
+        </form>
     </li>
 </ul>
+<hr />
+<form method="post" action="#" th:action="@{/getone}" >
+    <input type="text" name="id" />
+    <input type="submit" value="Get One" />
+</form>
 </body>
 </html>

@@ -35,10 +35,20 @@ public class BuildingRepository {
                 });
     }
 
+    public Building getOne(long id){
+        return jdbc.queryForObject("select * from buildings where id="+id,Building.class);
+    }
+
     public void save(Building building){
         jdbc.update(
                 "insert into buildings (name, address) values (?,?)",
                 building.getName(),
                 building.getAddress());
+    }
+
+    public void delete(long building){
+        jdbc.update(
+                "DELETE FROM buildings WHERE id = ?", building
+        );
     }
 }
